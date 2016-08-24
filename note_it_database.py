@@ -13,16 +13,16 @@ class NoteItDb():
 		# Creates the table that notes will be stored in
 		self.c.execute("CREATE TABLE if not exists note_it_data \
 				(id_column INTEGER PRIMARY KEY AUTOINCREMENT, \
-				title_column TEXT, \
+				title_column CHAR(50), \
 				body_column TEXT)" \
 				)
 		self.conn.commit() # Commits the changes
 	
-	def save_note(self, note_content):
+	def save_note(self, title, note_content):
 		# Saves the note_content that has been entered to the database
 		with self.conn:
-			self.c.execute("INSERT INTO note_it_data(body_column) \
-				VALUES ('{}')".format(note_content))
+			self.c.execute("INSERT INTO note_it_data(title_column, body_column) \
+				VALUES ('{}', '{}')".format(title, note_content))
 			# {} is a place holder for note_content
 
 	def view():

@@ -10,17 +10,15 @@ class NoteTaker(object):
 	"""Class that allows you to create, view, list, search through, 
 		delete and import, export as well well sync notes.
 	"""
-	_id = 0
-	note = []
-
+	
 	def __init__(self):
 		s.create_table() # Creates a new table if one doesn't exist 
 		
-	def create_note(self, note_content):
-		# NoteTaker.note.append(note_content)
-		# # Adds note to list 
-		
-		s.save_note(note_content)
+	def create_note(self, title, note_content):
+		# note = {}
+		# s.save_note(title)
+		s.save_note(title, note_content) 
+		# Saves the note_content within database 
 		
 
 def view_note(note_id):
@@ -55,5 +53,5 @@ def export_note():
 # b = NoteTaker()
 # b.create_note('This is my second note.')
 
-d = NoteTaker()
-d.create_note('This is my fourth note.')
+e = NoteTaker()
+e.create_note('Note 5', 'This is my fifth note.')

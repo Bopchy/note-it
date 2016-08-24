@@ -2,7 +2,7 @@
 	The available commands are specified under Usage below.
 
 	Usage: 
-		note_it create <note_content> 
+		note_it create <title> <note_content> 
 		note_it view <note_id>
 		note_it delete <note_id>
 		note_it list (--limit)
