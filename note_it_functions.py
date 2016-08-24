@@ -46,7 +46,7 @@ def export_note():
 # 	note
 
 # a = NoteTaker()
-# a.create_note('This is my first note.')
+# a.create_note('Note 1', 'This is my first note.')
 
 # b = NoteTaker()
 # b.create_note('This is my second note.')
@@ -54,12 +54,12 @@ def export_note():
 # e = NoteTaker()
 # print e.view_note(5)
 
-# f = NoteTaker()
-# print f.view_note(7)
+# h = NoteTaker()
+# print h.create_note('Note 7', 'This is my seventh note.')
 
 # print s.list(5)
 # print s.delete(5)
-print s.search ('This', 2)
+print s.search ('This', 5)
 
 
 
