@@ -32,15 +32,19 @@ class NoteItDb():
 				return item
 
 	def search(self, query_string, limit):
-		"""Retrieves a list of all the notes with a particuler query string """  
+		"""Retrieves a list of all the notes with a particuler query string, where
+			the limit specifies the maximum number of notes that can be listed  
+		"""  
 		with self.conn:
 			self.c.execute("SELECT * FROM note_it_data WHERE body_column LIKE \
-				'{}' LIMIT '{}'".format(query_string, limit))
-			for item in self.c.fetchmany():
-				print item
+				'%{}%' LIMIT '{}'".format(query_string, int(limit)))
+			for item in self.c.fetchall():
+				return item
 				
 	def list(self, limit):
-		"""Retrieves a list of all the notes taken """ 
+		"""Retrieves a list of all the notes takenwhere the limit specifies the 
+			maximum number of notes that can be listed
+		""" 
 		with self.conn:
 			self.c.execute("SELECT * FROM note_it_data LIMIT'{}'".format(limit))
 			for item in self.c.fetchall():
