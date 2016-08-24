@@ -21,8 +21,10 @@ class NoteTaker(object):
 		note = int(note_id)
 		return s.view(note_id)
 
-	def list_note():
-		pass
+	def list_note(self, limit):
+		"""Lists the specified number of all the existing notes"""
+		set_limit = int(limit)
+		return s.list(limit)
 
 def search_note(query_string):
 	pass
@@ -55,3 +57,6 @@ print e.view_note(5)
 
 f = NoteTaker()
 print f.view_note(7)
+
+print s.list_note(5)
+

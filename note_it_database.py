@@ -36,9 +36,9 @@ class NoteItDb():
 		# Retrieves a list of all the notes with a particuler query string  
 		pass
 
-	def list():
+	def list(self):
 		# Retrieves a list of all the notes taken 
-		pass
+		return self.c.execute("SELECT * FROM note_it_data")
 
 	def delete():
 		# Deletes a note with a particular note_id from database 
