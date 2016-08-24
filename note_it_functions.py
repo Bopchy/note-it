@@ -21,8 +21,8 @@ class NoteTaker(object):
 		note = int(note_id)
 		return s.view(note_id)
 
-def list_note():
-	pass
+	def list_note():
+		pass
 
 def search_note(query_string):
 	pass
