@@ -27,8 +27,9 @@ class NoteTaker(object):
 	def delete_note(self, note_id):
 		s.delete(note_id)
 
-def search_note(query_string):
-	pass
+	def search_note(self, query_string, limit):
+		"""Searches and lists notes that containing a particular query_string """
+		return s.search(query_string, limit)
 
 def sync_note():
 	pass

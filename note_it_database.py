@@ -2,15 +2,14 @@ import sqlite3
  
 
 class NoteItDb():
-	'''Class that creates table and handles database queries'''
-	
+	"""Class that creates table and handles database queries"""
 	def __init__(self): # Initializes the class 
 		"""Creates note_it.db then connects to it """ 
 		self.conn = sqlite3.connect('C:/Users/Ruth/clones/bc-9-note-it/bc-9-note-it/note_it.db')
 		self.c = self.conn.cursor()
 
 	def create_table(self):
-		# Creates the table that notes will be stored in
+		"""Creates the table that notes will be stored in """
 		self.c.execute("CREATE TABLE if not exists note_it_data \
 				(id_column INTEGER PRIMARY KEY AUTOINCREMENT, \
 				title_column CHAR(50), \
@@ -32,14 +31,17 @@ class NoteItDb():
 				id_column == '{}'".format(note_id)):
 				return item
 
-	def search():
-		# Retrieves a list of all the notes with a particuler query string  
-		pass
-
+	def search(self, query_string, limit):
+		"""Retrieves a list of all the notes with a particuler query string """  
+		with self.conn:
+			return self.c.execute("SELECT * FROM note_it_data WHERE body_column \
+				LIKE '{}' LIMIT '{}'".format(query_string, limit))
+				
 	def list(self, limit):
 		"""Retrieves a list of all the notes taken """ 
 		with self.conn:
-			for items in self.c.execute("SELECT * FROM note_it_data"):
+			for items in self.c.execute("SELECT * FROM note_it_data LIMIT \
+				'{}'".format(limit)):
 				return items
 
 	def delete(self, note_id):
