@@ -40,6 +40,9 @@ class NoteItDb():
 				'%{}%' LIMIT '{}'".format(query_string, int(limit)))
 			for item in self.c.fetchall():
 				print item # Return only returns one item
+
+	def search_next(self, start, step):
+		pass
 				
 	def list(self, limit):
 		"""Retrieves a list of all the notes takenwhere the limit specifies the 
@@ -48,7 +51,10 @@ class NoteItDb():
 		with self.conn:
 			self.c.execute("SELECT * FROM note_it_data LIMIT'{}'".format(limit))
 			for item in self.c.fetchall():
-				print item  	
+				print item 
+
+	def list_next():
+	 		pass 	
 
 	def delete(self, note_id):
 		"""Deletes a note with a particular note_id from database """ 
