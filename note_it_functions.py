@@ -32,9 +32,9 @@ class NoteTaker(object):
 		"""Searches and lists notes that containing a particular query_string """
 		return s.search(query_string, limit)
 
-	def s_next(self, start, step):
+	def s_next(self, query_string, start, step):
 		"""Moves from one set of search results data, to the next """
-		return search_next(start, step)
+		return s.search_next(query_string, start, step)
 
 	def delete_note(self, note_id):
 		s.delete(note_id)
@@ -68,6 +68,7 @@ def export_note():
 # print s.list(5)
 # print s.delete(5)
 print s.search ('This', 5)
+print s.search_next('This is', 3, 1) 
 
 
 

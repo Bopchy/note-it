@@ -40,9 +40,14 @@ class NoteItDb():
 				'%{}%' LIMIT '{}'".format(query_string, int(limit)))
 			for item in self.c.fetchall():
 				print item # Return only returns one item
-
-	def search_next(self, start, step):
-		pass
+	
+	def search_next(self, query_string, start, step):
+		""""Invokes the next set of data in the running query """
+		with self.conn:
+			self.c.execute("SELECT * FROM note_it_data WHERE body_column LIKE '%{}%' \
+				LIMIT '{}', '{}'".format(query_string, int(start), int(step))) 
+			for item in self.c.fetchall():
+				print item
 				
 	def list(self, limit):
 		"""Retrieves a list of all the notes takenwhere the limit specifies the 
@@ -53,13 +58,17 @@ class NoteItDb():
 			for item in self.c.fetchall():
 				print item 
 
-	def list_next():
-	 		pass 	
+	def list_next(self, start_point, step_size):
+	 	"""Invokes the next set of data in the running query"""
+	 	self.c.execute("SELECT * FROM note_it_data LIMIT '{}' \
+	 		'{}'".format(start_point, step_size))
+	 		# step_size specifes by how the next item to be shown increases   
 
 	def delete(self, note_id):
 		"""Deletes a note with a particular note_id from database """ 
 		with self.conn:
-			self.c.execute("DELETE FROM note_it_data WHERE id_column == '{}'".format(note_id))
+			self.c.execute("DELETE FROM note_it_data WHERE \
+				id_column == '{}'".format(note_id))
 
 	def sync():
 		"""Syncs notes with Firebase """
