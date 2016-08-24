@@ -39,7 +39,7 @@ class NoteItDb():
 			self.c.execute("SELECT * FROM note_it_data WHERE body_column LIKE \
 				'%{}%' LIMIT '{}'".format(query_string, int(limit)))
 			for item in self.c.fetchall():
-				print item
+				print item # Return only returns one item
 				
 	def list(self, limit):
 		"""Retrieves a list of all the notes takenwhere the limit specifies the 
