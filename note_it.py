@@ -18,11 +18,11 @@
 		--limit		sets the number of items to display in resulting list  
 '''
 
-from docopt import docopt
-from cmd import Cmd
+from docopt import docopt, DocoptExit
+import cmd 
 
-class NoteIt(Cmd):
-	def create_note(note_content):
+class NoteIt(cmd.Cmd): # Imports Cmd from cmd
+	def do_create(args):
 		pass
 
 # if __name__ == '__main__':
