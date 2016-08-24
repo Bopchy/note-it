@@ -8,7 +8,7 @@ class NoteItDb():
 		# Creates note_it.db then connects to it 
 		self.conn = sqlite3.connect('C:/Users/Ruth/clones/bc-9-note-it/bc-9-note-it/note_it.db')
 		self.c = self.conn.cursor()
-		
+
 	def create_table(self):
 		# Creates the table that notes will be stored in
 		self.c.execute("CREATE TABLE if not exists note_it_data \
@@ -25,11 +25,12 @@ class NoteItDb():
 				VALUES ('{}', '{}')".format(title, note_content))
 			# {} is a place holder for note_content
 
-	def view():
+	def view(self, note_id):
 		# Allows you to view a note with a particular note_id 
-		# with self.conn:
-		# 	self.c.execute()
-		pass 
+		with self.conn:
+			for item in self.c.execute("SELECT * FROM note_it_data WHERE \
+				id_column == '{}'".format(note_id)):
+				return item
 
 	def search():
 		# Retrieves a list of all the notes with a particuler query string  

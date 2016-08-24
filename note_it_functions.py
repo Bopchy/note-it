@@ -1,10 +1,7 @@
 from note_it_database import NoteItDb
 
-
-
 s = NoteItDb()
 # Instantiates 's' as an object of database class NoteItDb 
-# obj.create_table()
 
 class NoteTaker(object):
 	"""Class that allows you to create, view, list, search through, 
@@ -12,17 +9,17 @@ class NoteTaker(object):
 	"""
 	
 	def __init__(self):
-		s.create_table() # Creates a new table if one doesn't exist 
+		""" Creates a new table if one doesn't exist """
+		s.create_table() 
 		
 	def create_note(self, title, note_content):
-		# note = {}
-		# s.save_note(title)
-		s.save_note(title, note_content) 
-		# Saves the note_content within database 
-		
-
-def view_note(note_id):
-	pass
+		"""Creates and saves a note """
+		s.save_note(title, note_content)  
+	
+	def view_note(self, note_id):
+		"""Retrieves and displays a note with a specific note_id"""
+		note = int(note_id)
+		return s.view(note_id)
 
 def list_note():
 	pass
@@ -54,4 +51,7 @@ def export_note():
 # b.create_note('This is my second note.')
 
 e = NoteTaker()
-e.create_note('Note 5', 'This is my fifth note.')
+print e.view_note(5)
+
+f = NoteTaker()
+print f.view_note(7)
