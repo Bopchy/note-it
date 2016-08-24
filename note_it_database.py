@@ -34,15 +34,17 @@ class NoteItDb():
 	def search(self, query_string, limit):
 		"""Retrieves a list of all the notes with a particuler query string """  
 		with self.conn:
-			return self.c.execute("SELECT * FROM note_it_data WHERE body_column \
-				LIKE '{}' LIMIT '{}'".format(query_string, limit))
+			self.c.execute("SELECT * FROM note_it_data WHERE body_column LIKE \
+				'{}' LIMIT '{}'".format(query_string, limit))
+			for item in self.c.fetchmany():
+				print item
 				
 	def list(self, limit):
 		"""Retrieves a list of all the notes taken """ 
 		with self.conn:
-			for items in self.c.execute("SELECT * FROM note_it_data LIMIT \
-				'{}'".format(limit)):
-				return items
+			self.c.execute("SELECT * FROM note_it_data LIMIT'{}'".format(limit))
+			for item in self.c.fetchall():
+				print item  	
 
 	def delete(self, note_id):
 		"""Deletes a note with a particular note_id from database """ 
@@ -50,7 +52,7 @@ class NoteItDb():
 			self.c.execute("DELETE FROM note_it_data WHERE id_column == '{}'".format(note_id))
 
 	def sync():
-		# Syncs notes with Firebase
+		"""Syncs notes with Firebase """
 		pass
 
 # self.conn.close() # Closes connection to database file 
