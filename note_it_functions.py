@@ -12,13 +12,18 @@ class NoteTaker(object):
 		"""Creates a new table if one doesn't exist """
 		s.create_table() 
 	
-	def create_note(self, title, note_content):
+	def create_note(self, args):
 		"""Creates and saves a note """
-		s.save_note(title, note_content)  
+		title = raw_input('RE:')
+		note_content = raw_input(':-')
+		# for i in note_content:
+		# 	note_content += i
+		s.save_note(title, note_content)
+		print 'Your note has been saved.'  
 
 	def view_note(self, note_id):
 		"""Retrieves and displays a note with a specific note_id"""
-		return s.note_it_database.view(note_id)
+		print s.view(note_id)
 
 	def list_note(self, limit):
 		"""Lists the specified number of all the existing notes"""

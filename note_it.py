@@ -3,7 +3,7 @@
 The available commands are specified under Usage below.
 
 Usage:  
-	note_it create <title> <note_content> 
+	note_it create [note]
 	note_it view <note_id>
 	note_it delete <note_id>
 	note_it list (--limit)
@@ -66,78 +66,78 @@ class NoteIt(cmd.Cmd):
 	prompt = "(NoteIt)"
 
 	@docopt_cmd
-	def do_create(self, title):
-		"""Usage: create <title> <note_content> """ 
-		title = arg["<title>"]
-		note_content = arg["<note_content>"]
-		NoteTaker().create_note(title, note_content)
+	def do_create(self, arg):
+		"""Usage: create [note] """ 
+		# title = arg["<title>"]
+		# note_content = arg["<note_content>"]
+		NoteTaker().create_note(arg)
 
 	@docopt_cmd
-	def do_view(self):
+	def do_view(self, arg):
 		"""Usage: view <note_id> """
-		note_id = arg["<note_id>"]
-		return NoteTaker().view_note(note_id)	
+		# note_id = arg["<note_id>"]
+		return NoteTaker().view_note(arg)	
 # 
 	@docopt_cmd
-	def do_delete(self):
+	def do_delete(self, arg):
 		"""Usage: delete <note_id> """
-		note_id = arg["<note_id>"]
-		return NoteTaker().delete_note(note_id)
+		# note_id = arg["<note_id>"]
+		return NoteTaker().delete_note(arg)
 
 	@docopt_cmd
-	def do_list(self):
+	def do_list(self, arg):
 		"""Usage: list (--limit) """
-		limit = arg["(--limit)"]
-		return NoteTaker().list_note(limit)
+		# limit = arg["(--limit)"]
+		return NoteTaker().list_note(arg)
 
 	@docopt_cmd
-	def do_list_next(self):
+	def do_list_next(self, arg):
 		"""Usage: list_next <start_point> <step_size>"""
-		start_point = arg["<start_point>"]
-		step_size = arg["step_size"]
+		# start_point = arg["<start_point>"]
+		# step_size = arg["step_size"]
 		return NoteTaker().l_next(start_point, step_size)
 
 	@docopt_cmd
 	def do_search(self, arg):
 		"""Usage: search <query_string> (--limit) """
-		query_string = arg["<query_string>"]
-		limit = arg["(--limit)"]
+		# query_string = arg["<query_string>"]
+		# limit = arg["(--limit)"]
 		return NoteTaker().search_note(query_string, limit)
 
 	@docopt_cmd
-	def do_search_next(self):
+	def do_search_next(self, arg):
 		"""Usage: search_next <query_string> <start> <step> """
-		query_string = arg["<query_string>"]
-		start = arg["<start>"]
-		step = arg["<step>"]
+		# query_string = arg["<query_string>"]
+		# start = arg["<start>"]
+		# step = arg["<step>"]
 		return NoteTaker().s_next(query_string, start, step)
 
 	@docopt_cmd
-	def do_import(self):
+	def do_import(self, arg):
 		"""Usage: import <filename> """
-		filename = arg["<filename>"]
-		return NoteTaker().import_note(filename)
+		# filename = arg["<filename>"]
+		return NoteTaker().import_note(arg)
 
 	@docopt_cmd
-	def do_export(self):
+	def do_export(self, arg):
 		"""Usage: export <filename> """
-		filename = arg["<filename>"]
-		return NoteTaker().export_note(filename)
+		# filename = arg["<filename>"]
+		return NoteTaker().export_note(arg)
 
 	# def do_EOF(self, line):
 	# 	return True
 
-	def do_quit(self):
+	def do_quit(self, arg):
 		"""Usage: Quits interactive mode """
 		print '****** You have left NoteIt ******'
 		exit()
 
-opt = docopt(__doc__, sys.argv[1:])
+# opt = docopt(__doc__, sys.argv[1:])
 
-if opt['--interactive']:
-	NoteIt().cmdloop()
+# if opt['--interactive']:
+# 	NoteIt().cmdloop()
 
-print(opt)
+# print(opt)
 		# def default(self, arg):
 		# 	print("Exiting")
 
@@ -151,8 +151,8 @@ print(opt)
 	# 		# self.c = self.conn.cursor()
 	# 	except KeyboardInterrupt:
 	# 		print("Default Interrupt")
-# if __name__ == '__main__':
-# 	main()
+if __name__ == '__main__':
+	NoteIt().cmdloop()
 	
 
 
