@@ -23,9 +23,8 @@ import cmd
 
 class NoteIt(cmd.Cmd): # Imports Cmd from cmd
 	def do_create(args):
-		pass
+	pass
 
-# if __name__ == '__main__':
 
 
 
