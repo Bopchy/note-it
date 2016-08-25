@@ -39,17 +39,14 @@ class NoteTaker(object):
 	def delete_note(self, note_id):
 		s.delete(note_id)
 
-def sync_note():
-	pass
+	def import_note(self):
+		"""Imports notes from database as a JSON file """ 
+		existing_json_file = s.imp()
+		return 
 
-def import_note():
-	# Imports notes from database as a JSON 
-	pass
-
-def export_note():
-	# Exports notes as a JSON 
-	pass
-
+	def export_note(self):
+		"""Exports notes as a JSON """ 
+		pass
 # if __name__ == '__main__':
 # 	note
 

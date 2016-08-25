@@ -1,5 +1,6 @@
 import sqlite3
- 
+import json
+import collections  
 
 class NoteItDb():
 	"""Class that creates table and handles database queries"""
@@ -69,6 +70,34 @@ class NoteItDb():
 		with self.conn:
 			self.c.execute("DELETE FROM note_it_data WHERE \
 				id_column == '{}'".format(note_id))
+
+	def exp(self):
+		"""Exports entire database content to a JSON file, and saves it using  
+		a JSON format 
+		"""
+		json_exports = []
+		for item in (self.c.execute"SELECT * from note_it_data"):
+			d_= collections.Orded fumction
+			d_['id_column'] = row[0]
+			d_[title_column] = row[2] 
+			d_[body_column] = row[3]
+			json_exports.append() 
+		
+		a = json.dumps(json_exports)
+		json_file = 'Note_it_JSON.json'
+		b = open(json_exports, w)
+		print b, a
+
+	def imp(self):
+		"""Imports JSON file such that, you can populate database through \
+		the respective file
+		"""
+		json_file = "JSON_import.json."
+		_load =  json.load(open(json_file))
+		for item in _load:
+			with self.conn:
+				self.c.execute("INSERT INTO note_it_data (title_column, \
+					body_column) VALUES '{}', '{}'".format(title_column, body_column))
 
 	def sync():
 		"""Syncs notes with Firebase """
