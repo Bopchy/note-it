@@ -50,7 +50,7 @@ class NoteTaker(object):
 
 
 
-p = s.exp('json_trial_2')
+p = s.exp('json_file_3.json')
 print p
 
 # q = s.imp('json_trial')

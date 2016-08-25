@@ -61,8 +61,9 @@ class NoteItDb():
 
 	def list_next(self, start_point, step_size):
 	 	"""Invokes the next set of data in the running query"""
-	 	self.c.execute("SELECT * FROM note_it_data LIMIT '{}' \
-	 		'{}'".format(start_point, step_size))
+	 	with self.conn:
+	 		self.c.execute("SELECT * FROM note_it_data LIMIT '{}' \
+	 			'{}'".format(start_point, step_size))
 	 		# step_size specifes by how the next item to be shown increases   
 
 	def delete(self, note_id):
@@ -75,29 +76,20 @@ class NoteItDb():
 		"""Exports entire database content to a JSON file, and saves it using  
 			a JSON format 
 		"""
-		json_exports = {}
-		rows = self.c.execute("SELECT * from note_it_data")
-		for item in rows: 
-			d_= collections.OrderedDict()
-			d_['id_column'] = item[0]
-			d_['title_column'] = item[1] 
-			d_['body_column'] = item[2]
-			json_exports.add(d_)
-			# Appends all the dictionaries of items in 'rows' to list json_export   
-		
-		a = json.dumps(json_exports)
-		# Converts list 'json_exports' to JSON
+		rows = None
+		with self.conn:
+			self.c.execute("SELECT * from note_it_data")
+			rows = self.c.fetchall()
+			# rows now contains all the results of the query   
+		json1 = json.dumps(rows, ensure_ascii=False)
+		# Converts rows to JSON, eliminating the ascii's
 		json_file = str(filename)
 		# json_file is the file the JSON of the database will be exported to.
-		b = open(json_file, 'a')
-		# print b
+		b = open(json_file, 'wb') 
+		# Creates file with specified name, then adds the JSON to it. 
+		b.write(json1)
+		b.close()
 		self.c.close()
-
-	# def exp(self, cursor, row):
-	# 	d_={}
-	# 	for index, column in enumerate(cursor.descrption):
-	# 		d[col[0]] = row[index]
-	# 	return d
 
 	def imp(self, filename):
 		"""Imports JSON file such that, you can populate database through \
@@ -105,10 +97,12 @@ class NoteItDb():
 		"""
 		json_file = filename
 		_load =  json.load(open(json_file, 'r+'))
+		print _load
 		for item in _load:
 			with self.conn:
 				self.c.execute("INSERT INTO note_it_data (title_column, \
-					body_column) VALUES '{}', '{}'".format(title_column, body_column))
+					body_column) VALUES (?,?)",(item[1], item[2]))
+
 
 	def sync():
 		"""Syncs notes with Firebase """
