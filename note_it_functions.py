@@ -5,24 +5,24 @@ s = NoteItDb()
 
 class NoteTaker(object):
 	"""Class that allows you to create, view, list, search through, 
-		delete and import, export as well well sync notes.
+		delete and import, export as well as sync notes.
 	"""
 	
 	def __init__(self):
 		"""Creates a new table if one doesn't exist """
 		s.create_table() 
-		
+	
 	def create_note(self, title, note_content):
 		"""Creates and saves a note """
 		s.save_note(title, note_content)  
-	
+
 	def view_note(self, note_id):
 		"""Retrieves and displays a note with a specific note_id"""
-		return s.view(note_id)
+		return s.note_it_database.view(note_id)
 
 	def list_note(self, limit):
 		"""Lists the specified number of all the existing notes"""
-		return s.list(limit)
+		return s.list_(limit)
 
 	def l_next(self, start_point, step_size):
 		"""Moves from one set of list results data, to the next """
@@ -41,7 +41,6 @@ class NoteTaker(object):
 
 	def import_note(self, filename):
 		"""Imports notes from database as a JSON file """ 
-		# if str(filename) is exist:
 		return s.imp(filename)
 
 	def export_note(self, filename):

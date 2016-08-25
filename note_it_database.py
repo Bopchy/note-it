@@ -1,7 +1,7 @@
 import sqlite3
 import json
 import collections
-from firebase import firebase  
+# from firebase import firebase  
 
 class NoteItDb():
 	"""Class that creates table and handles database queries"""
@@ -18,7 +18,7 @@ class NoteItDb():
 				body_column TEXT)" \
 				)
 		self.conn.commit() # Commits the changes
-	
+
 	def save_note(self, title, note_content):
 		"""Saves the note_content that has been entered to the database """
 		with self.conn:
@@ -42,7 +42,7 @@ class NoteItDb():
 				'%{}%' LIMIT '{}'".format(query_string, int(limit)))
 			for item in self.c.fetchall():
 				print item # Return only returns one item
-	
+
 	def search_next(self, query_string, start, step):
 		""""Invokes the next set of data in the running query """
 		with self.conn:
@@ -51,7 +51,7 @@ class NoteItDb():
 			for item in self.c.fetchall():
 				print item
 				
-	def list(self, limit):
+	def list_(self, limit):
 		"""Retrieves a list of all the notes takenwhere the limit specifies the 
 			maximum number of notes that can be listed
 		""" 
@@ -104,8 +104,9 @@ class NoteItDb():
 				self.c.execute("INSERT INTO note_it_data (title_column, \
 					body_column) VALUES (?,?)",(item[1], item[2]))
 
-	def sync(self):
+	def sync():
 		"""Syncs notes in the database with Firebase """
-		
+		pass
+			
 
 # self.conn.close() # Closes connection to database file 
