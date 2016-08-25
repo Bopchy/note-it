@@ -1,6 +1,7 @@
 import sqlite3
 import json
-import collections  
+import collections
+from firebase import firebase  
 
 class NoteItDb():
 	"""Class that creates table and handles database queries"""
@@ -104,7 +105,7 @@ class NoteItDb():
 					body_column) VALUES (?,?)",(item[1], item[2]))
 
 
-	def sync():
+	def sync(self):
 		"""Syncs notes with Firebase """
 		pass
 
