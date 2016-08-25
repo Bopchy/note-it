@@ -26,6 +26,7 @@ class NoteTaker(object):
 
 	def list_note(self, limit):
 		"""Lists the specified number of all the existing notes"""
+		limit = raw_input('How many?')
 		return s.list_(limit)
 
 	def l_next(self, start_point, step_size):

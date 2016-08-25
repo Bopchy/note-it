@@ -54,13 +54,14 @@ class NoteItDb():
 				return item
 				
 	def list_(self, limit):
-		"""Retrieves a list of all the notes takenwhere the limit specifies the 
+		"""Retrieves a list of all the notes taken, where the limit specifies the 
 			maximum number of notes that can be listed
 		""" 
 		with self.conn:
-			self.c.execute("SELECT * FROM note_it_data LIMIT'{}'".format(limit))
+			self.c.execute("SELECT * FROM note_it_data LIMIT'{}'".format (int(limit)))
 			for item in self.c.fetchall():
-				print item 
+				print '{0} : {1} --> {2}'.format(item[0], item[1], item[2], \
+					ensure_ascii=False)
 
 	def list_next(self, start_point, step_size):
 	 	"""Invokes the next set of data in the running query"""

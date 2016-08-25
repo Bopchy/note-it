@@ -6,7 +6,7 @@ Usage:
 	note_it create [note]
 	note_it view [note_id]
 	note_it delete [note_id]
-	note_it list (--limit)
+	note_it list [(--limit)]
 	note_it list_next [<start_point>] [<step_size>]
 	note_it search [query_string] [(--limit)]
 	note_it search_next <query_string> <start> <step>
@@ -82,8 +82,7 @@ class NoteIt(cmd.Cmd):
 
 	@docopt_cmd
 	def do_list(self, arg):
-		"""Usage: list (--limit) """
-		# limit = arg["(--limit)"]
+		"""Usage: list [(--limit)] """
 		return NoteTaker().list_note(arg)
 
 	@docopt_cmd
