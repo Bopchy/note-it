@@ -73,24 +73,28 @@ class NoteItDb():
 
 	def exp(self):
 		"""Exports entire database content to a JSON file, and saves it using  
-		a JSON format 
+			a JSON format 
 		"""
 		json_exports = []
-		for item in (self.c.execute"SELECT * from note_it_data"):
-			d_= collections.Orded fumction
-			d_['id_column'] = row[0]
-			d_[title_column] = row[2] 
-			d_[body_column] = row[3]
-			json_exports.append() 
+		rows = self.c.execute("SELECT * from note_it_data")
+		for item in rows: 
+			d_= collections.OrderedDict()
+			d_['id_column'] = rows[0]
+			d_['title_column'] = rows[1] 
+			d_['body_column'] = rows[2]
+			json_exports.append(d_)
+			# Appends all the dictionaries of items in 'rows' to list json_export   
 		
 		a = json.dumps(json_exports)
-		json_file = 'Note_it_JSON.json'
-		b = open(json_exports, w)
+		# Converts list 'json_exports' to JSON
+		json_file = str(filename)
+		# json_file == file to be made from json_exports
+		b = open(json_file, 'w')
 		print b, a
 
 	def imp(self):
 		"""Imports JSON file such that, you can populate database through \
-		the respective file
+			the respective file
 		"""
 		json_file = "JSON_import.json."
 		_load =  json.load(open(json_file))

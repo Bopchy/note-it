@@ -46,7 +46,7 @@ class NoteTaker(object):
 
 	def export_note(self):
 		"""Exports notes as a JSON """ 
-		pass
+		return s.exp()
 # if __name__ == '__main__':
 # 	note
 
@@ -64,9 +64,10 @@ class NoteTaker(object):
 
 # print s.list(5)
 # print s.delete(5)
-print s.search ('This', 5)
-print s.search_next('This is', 3, 1) 
-
+# print s.search ('This', 5)
+# print s.search_next('This is', 3, 1) 
+print s.exp()
+# print s.delete(4)
 
 
 
