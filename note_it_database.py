@@ -71,7 +71,7 @@ class NoteItDb():
 			self.c.execute("DELETE FROM note_it_data WHERE \
 				id_column == '{}'".format(note_id))
 
-	def exp(self):
+	def exp(self, filename):
 		"""Exports entire database content to a JSON file, and saves it using  
 			a JSON format 
 		"""
@@ -79,16 +79,16 @@ class NoteItDb():
 		rows = self.c.execute("SELECT * from note_it_data")
 		for item in rows: 
 			d_= collections.OrderedDict()
-			d_['id_column'] = rows[0]
-			d_['title_column'] = rows[1] 
-			d_['body_column'] = rows[2]
+			d_['id_column'] = item[0]
+			d_['title_column'] = item[1] 
+			d_['body_column'] = item[2]
 			json_exports.append(d_)
 			# Appends all the dictionaries of items in 'rows' to list json_export   
 		
 		a = json.dumps(json_exports)
 		# Converts list 'json_exports' to JSON
 		json_file = str(filename)
-		# json_file == file to be made from json_exports
+		# json_file is the file the JSON of the database will be exported to.
 		b = open(json_file, 'w')
 		print b, a
 

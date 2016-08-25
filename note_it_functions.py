@@ -44,30 +44,12 @@ class NoteTaker(object):
 		existing_json_file = s.imp()
 		return 
 
-	def export_note(self):
+	def export_note(self, filename):
 		"""Exports notes as a JSON """ 
-		return s.exp()
-# if __name__ == '__main__':
-# 	note
+		return s.exp(filename)
 
-# a = NoteTaker()
-# a.create_note('Note 1', 'This is my first note.')
 
-# b = NoteTaker()
-# b.create_note('This is my second note.')
-
-# e = NoteTaker()
-# print e.view_note(5)
-
-# h = NoteTaker()
-# print h.create_note('Note 7', 'This is my seventh note.')
-
-# print s.list(5)
-# print s.delete(5)
-# print s.search ('This', 5)
-# print s.search_next('This is', 3, 1) 
-print s.exp()
-# print s.delete(4)
+print s.exp('json_trial.json')
 
 
 
