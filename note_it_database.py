@@ -104,9 +104,8 @@ class NoteItDb():
 				self.c.execute("INSERT INTO note_it_data (title_column, \
 					body_column) VALUES (?,?)",(item[1], item[2]))
 
-
 	def sync(self):
-		"""Syncs notes with Firebase """
-		pass
+		"""Syncs notes in the database with Firebase """
+		
 
 # self.conn.close() # Closes connection to database file 
