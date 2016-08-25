@@ -19,7 +19,7 @@ class NoteTaker(object):
 		s.save_note(title, note_content)
 		print 'Your note has been saved.'  
 
-	def view_note(self, arg):
+	def view_note(self, note_id):
 		"""Retrieves and displays a note with a specific note_id"""
 		note_id = int(raw_input('Enter note ID:'))
 		print s.view(note_id)
@@ -32,8 +32,10 @@ class NoteTaker(object):
 		"""Moves from one set of list results data, to the next """
 		return s.list_next(start_point, step_size)
 
-	def search_note(self, query_string, limit):
+	def search_note(self, args):
 		"""Searches and lists notes that containing a particular query_string """
+		query_string = raw_input('For which words?')
+		limit = raw_input('Show how many at once?')
 		return s.search(query_string, limit)
 
 	def s_next(self, query_string, start, step):

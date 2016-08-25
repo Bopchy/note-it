@@ -7,8 +7,8 @@ Usage:
 	note_it view [note_id]
 	note_it delete [note_id]
 	note_it list (--limit)
-	note_it list_next <start_point> <step_size>
-	note_it search <query_string> (--limit)
+	note_it list_next [<start_point>] [<step_size>]
+	note_it search [query_string] [(--limit)]
 	note_it search_next <query_string> <start> <step>
 	note_it import <filename>
 	note_it export <filename>
@@ -94,11 +94,9 @@ class NoteIt(cmd.Cmd):
 		return NoteTaker().l_next(start_point, step_size)
 
 	@docopt_cmd
-	def do_search(self, arg):
-		"""Usage: search <query_string> (--limit) """
-		# query_string = arg["<query_string>"]
-		# limit = arg["(--limit)"]
-		return NoteTaker().search_note(query_string, limit)
+	def do_search(self, args):
+		"""Usage: search [query_string] [(--limit)] """
+		return NoteTaker().search_note(args)
 
 	@docopt_cmd
 	def do_search_next(self, arg):

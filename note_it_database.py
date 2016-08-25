@@ -42,7 +42,8 @@ class NoteItDb():
 			self.c.execute("SELECT * FROM note_it_data WHERE body_column LIKE \
 				'%{}%' LIMIT '{}'".format(query_string, int(limit)))
 			for item in self.c.fetchall():
-				print item # Return only returns one item
+				print '{0} : {1} --> {2}'.format(item[0], item[1], item[2], \
+					ensure_ascii=False)
 
 	def search_next(self, query_string, start, step):
 		""""Invokes the next set of data in the running query """
@@ -50,7 +51,7 @@ class NoteItDb():
 			self.c.execute("SELECT * FROM note_it_data WHERE body_column LIKE '%{}%' \
 				LIMIT '{}', '{}'".format(query_string, int(start), int(step))) 
 			for item in self.c.fetchall():
-				print item
+				return item
 				
 	def list_(self, limit):
 		"""Retrieves a list of all the notes takenwhere the limit specifies the 
