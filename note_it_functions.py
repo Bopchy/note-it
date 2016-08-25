@@ -41,7 +41,10 @@ class NoteTaker(object):
 		return s.search_next(query_string, start, step)
 
 	def delete_note(self, note_id):
+		"""Deletes note with a particular note_id """
+		note_id = int(raw_input('Enter note ID:'))
 		s.delete(note_id)
+		print 'The note has been deleted'
 
 	def import_note(self, filename):
 		"""Imports notes from database as a JSON file """ 

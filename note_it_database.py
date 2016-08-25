@@ -72,7 +72,7 @@ class NoteItDb():
 		"""Deletes a note with a particular note_id from database """ 
 		with self.conn:
 			self.c.execute("DELETE FROM note_it_data WHERE \
-				id_column == '{}'".format(note_id))
+				id_column == '%i'" % (note_id))
 
 	def exp(self, filename):
 		"""Exports entire database content to a JSON file, and saves it using  

@@ -5,7 +5,7 @@ The available commands are specified under Usage below.
 Usage:  
 	note_it create [note]
 	note_it view [note_id]
-	note_it delete <note_id>
+	note_it delete [note_id]
 	note_it list (--limit)
 	note_it list_next <start_point> <step_size>
 	note_it search <query_string> (--limit)
@@ -73,13 +73,11 @@ class NoteIt(cmd.Cmd):
 	@docopt_cmd
 	def do_view(self, arg):
 		"""Usage: view [note_id] """
-		# note_id = arg["<note_id>"]
 		return NoteTaker().view_note(arg)	
-# 
+ 
 	@docopt_cmd
 	def do_delete(self, arg):
-		"""Usage: delete <note_id> """
-		# note_id = arg["<note_id>"]
+		"""Usage: delete [note_id] """
 		return NoteTaker().delete_note(arg)
 
 	@docopt_cmd
@@ -122,9 +120,6 @@ class NoteIt(cmd.Cmd):
 		# filename = arg["<filename>"]
 		return NoteTaker().export_note(arg)
 
-	# def do_EOF(self, line):
-	# 	return True
-
 	def do_quit(self, arg):
 		"""Usage: Quits interactive mode """
 		print '****** You have left NoteIt ******'
@@ -139,16 +134,6 @@ class NoteIt(cmd.Cmd):
 		# def default(self, arg):
 		# 	print("Exiting")
 
-	# 
-	# 	# print("Im Here!")
-	# 	"""Creates note_it.db then connects to it """ 
-		
-	# 	try:
-	# 		NoteIt().cmdloop()
-	# 		# self.conn = sqlite3.connect('C:/Users/Ruth/clones/bc-9-note-it/bc-9-note-it/note_it.db')
-	# 		# self.c = self.conn.cursor()
-	# 	except KeyboardInterrupt:
-	# 		print("Default Interrupt")
 if __name__ == '__main__':
 	NoteIt().cmdloop()
 	
