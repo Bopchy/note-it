@@ -22,15 +22,17 @@ class NoteItDb():
 	def save_note(self, title, note_content):
 		"""Saves the note_content that has been entered to the database """
 		with self.conn:
-			self.c.execute("INSERT INTO note_it_data(title_column, body_column) VALUES ('%s','%s')" % (title, note_content))
+			self.c.execute("INSERT INTO note_it_data(title_column, body_column) \
+				VALUES ('%s','%s')" % (title, note_content))
 			# {} is a place holder for note_content
 
 	def view(self, note_id):
 		"""Allows you to view a note with a particular note_id """ 
 		with self.conn:
-			for item in self.c.execute("SELECT * FROM note_it_data WHERE \
-				id_column == '(?)'",(note_id)):
-				return item
+			self.c.execute("SELECT * FROM note_it_data WHERE \
+				id_column == ('%i')" % (note_id))
+			for item in self.c.fetchall():
+				return'{0} : {1} --> {2}'.format(item[0], item[1], item[2])
 
 	def search(self, query_string, limit):
 		"""Retrieves a list of all the notes with a particuler query string, where

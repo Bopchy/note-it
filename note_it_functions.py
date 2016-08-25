@@ -16,13 +16,12 @@ class NoteTaker(object):
 		"""Creates and saves a note """
 		title = raw_input('RE:')
 		note_content = raw_input(':-')
-		# for i in note_content:
-		# 	note_content += i
 		s.save_note(title, note_content)
 		print 'Your note has been saved.'  
 
-	def view_note(self, note_id):
+	def view_note(self, arg):
 		"""Retrieves and displays a note with a specific note_id"""
+		note_id = int(raw_input('Enter note ID:'))
 		print s.view(note_id)
 
 	def list_note(self, limit):

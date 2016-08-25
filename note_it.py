@@ -4,7 +4,7 @@ The available commands are specified under Usage below.
 
 Usage:  
 	note_it create [note]
-	note_it view <note_id>
+	note_it view [note_id]
 	note_it delete <note_id>
 	note_it list (--limit)
 	note_it list_next <start_point> <step_size>
@@ -68,13 +68,11 @@ class NoteIt(cmd.Cmd):
 	@docopt_cmd
 	def do_create(self, arg):
 		"""Usage: create [note] """ 
-		# title = arg["<title>"]
-		# note_content = arg["<note_content>"]
 		NoteTaker().create_note(arg)
 
 	@docopt_cmd
 	def do_view(self, arg):
-		"""Usage: view <note_id> """
+		"""Usage: view [note_id] """
 		# note_id = arg["<note_id>"]
 		return NoteTaker().view_note(arg)	
 # 
