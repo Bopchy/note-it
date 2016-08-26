@@ -12,7 +12,7 @@ Usage:
 	note_it search_next <query_string> <start> <step>
 	note_it import [filename]
 	note_it export [filename]
-	note_it sync
+	note_it sync []
 	note_it -h | --help
 	note_it --version
 	note_it --interactive | -i
@@ -25,8 +25,8 @@ Options:
 
 import sys
 import cmd
-from colorama import init
-from termcolor import cprint 
+# from colorama import init
+# from termcolor import cprint 
 # from pyfiglet 
 from docopt import docopt, DocoptExit
 from note_it_functions import NoteTaker 
@@ -64,7 +64,9 @@ def docopt_cmd(func):
 class NoteIt(cmd.Cmd): 
 	"""This is a Note Taking console application dubbed Note It """
 	
-	# def __init__(self):
+	def intro():
+		pass
+
 	intro = intro()
 	prompt = "(NoteIt)"
 
@@ -119,6 +121,12 @@ class NoteIt(cmd.Cmd):
 		"""Usage: export [filename] """
 		NoteTaker().export_note(arg)
 		print 'The data has been exported to a JSON file.'
+
+	@docopt_cmd
+	def do_sync(self, args):
+		"""Usage: sync [] """
+		NoteTaker().sync_note(args)
+		print 'Firebase has been synced with your local database.'
 
 	def do_quit(self, arg):
 		"""Usage: Quits interactive mode """

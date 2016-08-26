@@ -59,6 +59,13 @@ class NoteTaker(object):
 		filename = raw_input('Filename to be exported to:') 
 		return s.exp(filename)
 
+	def sync_note(self, args):
+		"""Syncs notes in the database with Firebase """
+		if len(args) == 0:
+			s.sync()
+		else:
+			pass
+
 
 
 
