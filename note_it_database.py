@@ -3,7 +3,7 @@ import json
 import collections
 from firebase import firebase
 
-firebase = firebase.FirebaseApplication('https://note-it-10926.firebaseio.com/', None)  
+firebase = firebase.FirebaseApplication('https://note-95345.firebaseio.com/', None)  
 
 class NoteItDb():
 	"""Class that creates table and handles database queries"""
