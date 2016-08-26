@@ -1,7 +1,9 @@
 import sqlite3
 import json
 import collections
-# from firebase import firebase  
+from firebase import firebase
+
+firebase = firebase.FirebaseApplication('https://note-it-10926.firebaseio.com/', None)  
 
 class NoteItDb():
 	"""Class that creates table and handles database queries"""
@@ -106,9 +108,14 @@ class NoteItDb():
 				self.c.execute("INSERT INTO note_it_data (title_column, \
 					body_column) VALUES (?,?)",(item[1], item[2]))
 
-	def sync():
-		"""Syncs notes in the database with Firebase """
-		pass
+	def sync(self):
+		"""Syncs notes in the local database with Firebase """
+		with self.conn:
+			self.c.execute("SELECT * FROM note_it_data")
+			for items in self.c.fetchall():
+				firebase.post('/note_it_data', None) 
+				# Where 'Notes' is the name of the snapshot 
+
 			
 
-# self.conn.close() # Closes connection to database file 
+
