@@ -62,8 +62,7 @@ class NoteIt(cmd.Cmd):
 	"""This is a Note Taking console application dubbed Note It """
 	
 	def intro():
-       pass
- 
+		pass
 
 	intro = intro()
 	prompt = "(NoteIt)"
@@ -91,8 +90,6 @@ class NoteIt(cmd.Cmd):
 	@docopt_cmd
 	def do_list_next(self, arg):
 		"""Usage: list_next <start_point> <step_size>"""
-		# start_point = arg["<start_point>"]
-		# step_size = arg["step_size"]
 		return NoteTaker().l_next(start_point, step_size)
 
 	@docopt_cmd
@@ -103,9 +100,6 @@ class NoteIt(cmd.Cmd):
 	@docopt_cmd
 	def do_search_next(self, arg):
 		"""Usage: search_next <query_string> <start> <step> """
-		# query_string = arg["<query_string>"]
-		# start = arg["<start>"]
-		# step = arg["<step>"]
 		return NoteTaker().s_next(query_string, start, step)
 
 	@docopt_cmd
