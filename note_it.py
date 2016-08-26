@@ -1,4 +1,3 @@
-# def main():
 """This program is a Note taking application, known as 'Note It'.
 The available commands are specified under Usage below.
 
@@ -25,9 +24,7 @@ Options:
 
 import sys
 import cmd
-# from colorama import init
-# from termcolor import cprint 
-# from pyfiglet 
+from termcolor import colored 
 from docopt import docopt, DocoptExit
 from note_it_functions import NoteTaker 
 
@@ -65,7 +62,8 @@ class NoteIt(cmd.Cmd):
 	"""This is a Note Taking console application dubbed Note It """
 	
 	def intro():
-		pass
+       pass
+ 
 
 	intro = intro()
 	prompt = "(NoteIt)"

@@ -1,6 +1,7 @@
 import sqlite3
 import json
 import collections
+from termcolor import colored
 from firebase import firebase
 
 firebase = firebase.FirebaseApplication('https://note-95345.firebaseio.com/', None)  
@@ -34,7 +35,7 @@ class NoteItDb():
 			self.c.execute("SELECT * FROM note_it_data WHERE \
 				id_column == ('%i')" % (note_id))
 			for item in self.c.fetchall():
-				return'{0} : {1} --> {2}'.format(item[0], item[1], item[2])
+				return colored('{0} : {1} --> {2}'.format(item[0], item[1], item[2]), green)
 
 	def search(self, query_string, limit):
 		"""Retrieves a list of all the notes with a particuler query string, where
@@ -44,8 +45,8 @@ class NoteItDb():
 			self.c.execute("SELECT * FROM note_it_data WHERE body_column LIKE \
 				'%{}%' LIMIT '{}'".format(query_string, int(limit)))
 			for item in self.c.fetchall():
-				print '{0} : {1} --> {2}'.format(item[0], item[1], item[2], \
-					ensure_ascii=False)
+				print colored('{0} : {1} --> {2}'.format(item[0], item[1], item[2], \
+					ensure_ascii=False), 'green')
 
 	def search_next(self, query_string, start, step):
 		""""Invokes the next set of data in the running query """
@@ -62,8 +63,8 @@ class NoteItDb():
 		with self.conn:
 			self.c.execute("SELECT * FROM note_it_data LIMIT'{}'".format (int(limit)))
 			for item in self.c.fetchall():
-				print '{0} : {1} --> {2}'.format(item[0], item[1], item[2], \
-					ensure_ascii=False)
+				print colored('{0} : {1} --> {2}'.format(item[0], item[1], item[2], \
+					ensure_ascii=False), 'green')
 
 	def list_next(self, start_point, step_size):
 	 	"""Invokes the next set of data in the running query"""
@@ -113,8 +114,9 @@ class NoteItDb():
 		with self.conn:
 			self.c.execute("SELECT * FROM note_it_data")
 			for items in self.c.fetchall():
-				firebase.post('/note_it_data', None) 
-				# Where 'Notes' is the name of the snapshot 
+				firebase.post('note_it_data', items) 
+				print colored("sdf",'red')
+				
 
 			
 
