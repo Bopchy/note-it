@@ -1,7 +1,7 @@
 import sqlite3
 import json
 import collections
-from firebase import firebase  
+# from firebase import firebase  
 
 class NoteItDb():
 	"""Class that creates table and handles database queries"""
@@ -18,20 +18,21 @@ class NoteItDb():
 				body_column TEXT)" \
 				)
 		self.conn.commit() # Commits the changes
-	
+
 	def save_note(self, title, note_content):
 		"""Saves the note_content that has been entered to the database """
 		with self.conn:
 			self.c.execute("INSERT INTO note_it_data(title_column, body_column) \
-				VALUES ('{}', '{}')".format(title, note_content))
+				VALUES ('%s','%s')" % (title, note_content))
 			# {} is a place holder for note_content
 
 	def view(self, note_id):
 		"""Allows you to view a note with a particular note_id """ 
 		with self.conn:
-			for item in self.c.execute("SELECT * FROM note_it_data WHERE \
-				id_column == '{}'".format(note_id)):
-				return item
+			self.c.execute("SELECT * FROM note_it_data WHERE \
+				id_column == ('%i')" % (note_id))
+			for item in self.c.fetchall():
+				return'{0} : {1} --> {2}'.format(item[0], item[1], item[2])
 
 	def search(self, query_string, limit):
 		"""Retrieves a list of all the notes with a particuler query string, where
@@ -41,24 +42,26 @@ class NoteItDb():
 			self.c.execute("SELECT * FROM note_it_data WHERE body_column LIKE \
 				'%{}%' LIMIT '{}'".format(query_string, int(limit)))
 			for item in self.c.fetchall():
-				print item # Return only returns one item
-	
+				print '{0} : {1} --> {2}'.format(item[0], item[1], item[2], \
+					ensure_ascii=False)
+
 	def search_next(self, query_string, start, step):
 		""""Invokes the next set of data in the running query """
 		with self.conn:
 			self.c.execute("SELECT * FROM note_it_data WHERE body_column LIKE '%{}%' \
 				LIMIT '{}', '{}'".format(query_string, int(start), int(step))) 
 			for item in self.c.fetchall():
-				print item
+				return item
 				
-	def list(self, limit):
-		"""Retrieves a list of all the notes takenwhere the limit specifies the 
+	def list_(self, limit):
+		"""Retrieves a list of all the notes taken, where the limit specifies the 
 			maximum number of notes that can be listed
 		""" 
 		with self.conn:
-			self.c.execute("SELECT * FROM note_it_data LIMIT'{}'".format(limit))
+			self.c.execute("SELECT * FROM note_it_data LIMIT'{}'".format (int(limit)))
 			for item in self.c.fetchall():
-				print item 
+				print '{0} : {1} --> {2}'.format(item[0], item[1], item[2], \
+					ensure_ascii=False)
 
 	def list_next(self, start_point, step_size):
 	 	"""Invokes the next set of data in the running query"""
@@ -71,7 +74,7 @@ class NoteItDb():
 		"""Deletes a note with a particular note_id from database """ 
 		with self.conn:
 			self.c.execute("DELETE FROM note_it_data WHERE \
-				id_column == '{}'".format(note_id))
+				id_column == '%i'" % (note_id))
 
 	def exp(self, filename):
 		"""Exports entire database content to a JSON file, and saves it using  
@@ -96,17 +99,16 @@ class NoteItDb():
 		"""Imports JSON file such that, you can populate database through \
 			the respective file
 		"""
-		json_file = filename
+		json_file = str(filename)
 		_load =  json.load(open(json_file, 'r+'))
-		print _load
 		for item in _load:
 			with self.conn:
 				self.c.execute("INSERT INTO note_it_data (title_column, \
 					body_column) VALUES (?,?)",(item[1], item[2]))
 
-
-	def sync(self):
-		"""Syncs notes with Firebase """
+	def sync():
+		"""Syncs notes in the database with Firebase """
 		pass
+			
 
 # self.conn.close() # Closes connection to database file 

@@ -5,31 +5,38 @@ s = NoteItDb()
 
 class NoteTaker(object):
 	"""Class that allows you to create, view, list, search through, 
-		delete and import, export as well well sync notes.
+		delete and import, export as well as sync notes.
 	"""
 	
 	def __init__(self):
 		"""Creates a new table if one doesn't exist """
 		s.create_table() 
-		
-	def create_note(self, title, note_content):
-		"""Creates and saves a note """
-		s.save_note(title, note_content)  
 	
+	def create_note(self, args):
+		"""Creates and saves a note """
+		title = raw_input('RE:')
+		note_content = raw_input(':-')
+		s.save_note(title, note_content)
+		print 'Your note has been saved.'  
+
 	def view_note(self, note_id):
 		"""Retrieves and displays a note with a specific note_id"""
-		return s.view(note_id)
+		note_id = int(raw_input('Enter note ID:'))
+		print s.view(note_id)
 
 	def list_note(self, limit):
 		"""Lists the specified number of all the existing notes"""
-		return s.list(limit)
+		limit = raw_input('How many?')
+		return s.list_(limit)
 
 	def l_next(self, start_point, step_size):
 		"""Moves from one set of list results data, to the next """
 		return s.list_next(start_point, step_size)
 
-	def search_note(self, query_string, limit):
+	def search_note(self, args):
 		"""Searches and lists notes that containing a particular query_string """
+		query_string = raw_input('For which words?')
+		limit = raw_input('Show how many at once?')
 		return s.search(query_string, limit)
 
 	def s_next(self, query_string, start, step):
@@ -37,15 +44,19 @@ class NoteTaker(object):
 		return s.search_next(query_string, start, step)
 
 	def delete_note(self, note_id):
+		"""Deletes note with a particular note_id """
+		note_id = int(raw_input('Enter note ID:'))
 		s.delete(note_id)
+		print 'The note has been deleted'
 
 	def import_note(self, filename):
 		"""Imports notes from database as a JSON file """ 
-		# if str(filename) is exist:
+		filename = raw_input('File to import from:')
 		return s.imp(filename)
 
 	def export_note(self, filename):
-		"""Exports notes as a JSON """ 
+		"""Exports notes as a JSON """
+		filename = raw_input('Filename to be exported to:') 
 		return s.exp(filename)
 
 
