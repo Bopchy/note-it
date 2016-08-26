@@ -99,9 +99,8 @@ class NoteItDb():
 		"""Imports JSON file such that, you can populate database through \
 			the respective file
 		"""
-		json_file = filename
+		json_file = str(filename)
 		_load =  json.load(open(json_file, 'r+'))
-		print _load
 		for item in _load:
 			with self.conn:
 				self.c.execute("INSERT INTO note_it_data (title_column, \

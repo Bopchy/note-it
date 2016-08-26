@@ -10,8 +10,8 @@ Usage:
 	note_it list_next [<start_point>] [<step_size>]
 	note_it search [query_string] [(--limit)]
 	note_it search_next <query_string> <start> <step>
-	note_it import <filename>
-	note_it export <filename>
+	note_it import [filename]
+	note_it export [filename]
 	note_it sync
 	note_it -h | --help
 	note_it --version
@@ -107,15 +107,15 @@ class NoteIt(cmd.Cmd):
 
 	@docopt_cmd
 	def do_import(self, arg):
-		"""Usage: import <filename> """
-		# filename = arg["<filename>"]
-		return NoteTaker().import_note(arg)
+		"""Usage: import [filename] """
+		NoteTaker().import_note(arg)
+		print 'The file contents have been imported into the database.'
 
 	@docopt_cmd
 	def do_export(self, arg):
-		"""Usage: export <filename> """
-		# filename = arg["<filename>"]
-		return NoteTaker().export_note(arg)
+		"""Usage: export [filename] """
+		NoteTaker().export_note(arg)
+		print 'The data has been exported to a JSON file.'
 
 	def do_quit(self, arg):
 		"""Usage: Quits interactive mode """

@@ -51,10 +51,12 @@ class NoteTaker(object):
 
 	def import_note(self, filename):
 		"""Imports notes from database as a JSON file """ 
+		filename = raw_input('File to import from:')
 		return s.imp(filename)
 
 	def export_note(self, filename):
-		"""Exports notes as a JSON """ 
+		"""Exports notes as a JSON """
+		filename = raw_input('Filename to be exported to:') 
 		return s.exp(filename)
 
 
