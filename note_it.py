@@ -25,6 +25,9 @@ Options:
 
 import sys
 import cmd
+from colorama import init
+from termcolor import cprint 
+# from pyfiglet 
 from docopt import docopt, DocoptExit
 from note_it_functions import NoteTaker 
 
@@ -62,7 +65,7 @@ class NoteIt(cmd.Cmd):
 	"""This is a Note Taking console application dubbed Note It """
 	
 	# def __init__(self):
-	# 	self.prompt = "-->"
+	intro = intro()
 	prompt = "(NoteIt)"
 
 	@docopt_cmd
@@ -121,7 +124,7 @@ class NoteIt(cmd.Cmd):
 		"""Usage: Quits interactive mode """
 		print '****** You have left NoteIt ******'
 		exit()
-
+	
 # opt = docopt(__doc__, sys.argv[1:])
 
 # if opt['--interactive']:
