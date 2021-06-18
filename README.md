@@ -1,1 +1,3 @@
-# bc-9-note-taker
+# note-it
+
+Python based CLI note taking application
